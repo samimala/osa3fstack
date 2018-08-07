@@ -3,27 +3,27 @@ const app = express()
 
 let catalogue = [
     { name: 'Eka Nimi',
-      number: 040-12345,
+      number: '040-12345',
       id: 1
     },
     { name: 'Toka Nimi',
-      number: 040-123456,
+      number: '040-123456',
       id: 2
     },
     { name: 'Kolmas Nimi',
-      number: 040-1234567,
+      number: '040-1234567',
       id: 3
     },
     { name: 'Neljäs Nimi',
-      number: 040-1234,
+      number: '040-1234',
       id: 4
     },
     { name: 'Viides Nimi',
-      number: 040-1234586,
+      number: '040-1234586',
       id: 5
     },
     { name: 'Kuudes Nimi',
-      number: 060-1234586,
+      number: '060-1234586',
       id: 6
     },
 ]
@@ -33,8 +33,15 @@ app.get('/info', (req, res) => {
               '<div>' + new Date()+ '</div>')
  })
  
-app.get('/api', (req, res) => {
-   res.send('<h1>Hittojako täällä, kokeile vielä person</h1>')
+app.get('/api/persons/:id', (req, res) => {
+   const id = Number(req.params.id)
+   const person = catalogue.find(person => person.id === id)
+   console.log('Found person ', person)
+   if (person) {
+       res.json(person)
+   } else {
+       res.status(404).end()
+   }
 })
 
 app.get('/api/persons', (req, res) => {
