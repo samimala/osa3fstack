@@ -28,8 +28,9 @@ let catalogue = [
     },
 ]
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hittojako täällä, mene apin alle</h1>')
+app.get('/info', (req, res) => {
+    res.send('<div>Puhelinluettolossa on ' + catalogue.length + ' henkilön tiedot</div>' +
+              '<div>' + new Date()+ '</div>')
  })
  
 app.get('/api', (req, res) => {
