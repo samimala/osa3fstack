@@ -44,6 +44,13 @@ app.get('/api/persons/:id', (req, res) => {
    }
 })
 
+app.delete('/api/persons/:id', (req, res) => {
+    const id = Number(req.params.id)
+    catalogue = catalogue.filter(person => person.id !== id)
+    res.json(person)
+    res.status(204).end()
+ })
+ 
 app.get('/api/persons', (req, res) => {
     res.json(catalogue)
  })
