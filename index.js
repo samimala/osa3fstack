@@ -55,15 +55,32 @@ app.delete('/api/persons/:id', (req, res) => {
  })
 
  app.post('/api/persons/', (req, res) => {
-  const person = req.body
-  console.log('Tuli ', person)
+  const newperson = req.body
+  console.log('Tuli ', req.body)
+ 
+  // Tarkista, että data sisältää nimen ja numeron
+  if (newperson.name === undefined) {
+    return res.status(400).json({error: 'Name missing'})  
+  }
+  if (newperson.number === undefined) {
+    return res.status(400).json({error: 'Number missing'})  
+  }
+
+  // Tarkista, onko nimi jo luettelossa
+  if (catalogue.find(person => person.name === newperson.name)) {
+    return res.status(400).json({error: 'Name already exists in the catalogue'})
+  }
+
+  console.log('Adding person ', newperson)
+
+
   do {
     var id = (Math.random()*100000).toFixed()
   } while(catalogue.find(person => person.id === id))
 
-  person.id = id
-  catalogue.push(person)
-  res.json(person)
+  newperson.id = id
+  catalogue.push(newperson)
+  res.json(newperson)
 })
 
 app.get('/api/persons', (req, res) => {
