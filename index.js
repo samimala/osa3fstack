@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
 
 let catalogue = [
     { name: 'Eka Nimi',
@@ -50,7 +53,19 @@ app.delete('/api/persons/:id', (req, res) => {
     res.json(person)
     res.status(204).end()
  })
- 
+
+ app.post('/api/persons/', (req, res) => {
+  const person = req.body
+  console.log('Tuli ', person)
+  do {
+    var id = (Math.random()*100000).toFixed()
+  } while(catalogue.find(person => person.id === id))
+
+  person.id = id
+  catalogue.push(person)
+  res.json(person)
+})
+
 app.get('/api/persons', (req, res) => {
     res.json(catalogue)
  })
