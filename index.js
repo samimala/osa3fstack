@@ -1,5 +1,9 @@
 const express = require('express')
 const app = express()
+
+const cors = require('cors')
+app.use(cors())
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
@@ -56,7 +60,6 @@ app.get('/api/persons/:id', (req, res) => {
 app.delete('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id)
     catalogue = catalogue.filter(person => person.id !== id)
-    res.json(person)
     res.status(204).end()
  })
 
