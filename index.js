@@ -4,7 +4,10 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
 const morgan = require('morgan')
-app.use(morgan('tiny'))
+//app.use(morgan('tiny'))
+morgan.token('reqbody', (req,res) => JSON.stringify(req.body) )
+app.use(morgan(':method :url :reqbody :status :res[content-length] - :response-time ms'))
+
 
 let catalogue = [
     { name: 'Eka Nimi',
@@ -40,8 +43,9 @@ app.get('/info', (req, res) => {
  
 app.get('/api/persons/:id', (req, res) => {
    const id = Number(req.params.id)
+   
    const person = catalogue.find(person => person.id === id)
-   console.log('Found person ', person)
+   //console.log('Found person ', person)
    if (person) {
        res.json(person)
    } else {
@@ -57,9 +61,11 @@ app.delete('/api/persons/:id', (req, res) => {
  })
 
  app.post('/api/persons/', (req, res) => {
-  const newperson = req.body
-  console.log('Tuli ', req.body)
- 
+  // Kloonataan json-olio, koska morgan tulostaa
+  // req.bodyn vasta tämän routen loputtua, ja
+  // routessa lisätään olioon id-kenttä
+  const newperson = Object.assign({},req.body)
+  
   // Tarkista, että data sisältää nimen ja numeron
   if (newperson.name === undefined) {
     return res.status(400).json({error: 'Name missing'})  
@@ -72,9 +78,6 @@ app.delete('/api/persons/:id', (req, res) => {
   if (catalogue.find(person => person.name === newperson.name)) {
     return res.status(400).json({error: 'Name already exists in the catalogue'})
   }
-
-  console.log('Adding person ', newperson)
-
 
   do {
     var id = (Math.random()*100000).toFixed()
