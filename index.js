@@ -94,16 +94,12 @@ app.delete('/api/persons/:id', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    let dbcataloguq = []
     Person
       .find({})
-      .then(result => {
-        result.foreach(person => {
-          dbcatalogue.push(person)
+      .then(persons => {
+          mongoose.connection.close()
+          res.json(persons)
         })
-        mongoose.connection.close()
-      })
-    res.json(dbcatalogue)
  })
  
 
