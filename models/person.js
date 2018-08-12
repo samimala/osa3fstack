@@ -7,7 +7,7 @@ mongoose.connect(url, { useNewUrlParser: true })
 
 const Person = mongoose.model('Person', {
     name: String,
-    number: String,
+    number: String
 })
 
 module.exports = Person
