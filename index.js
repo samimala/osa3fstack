@@ -94,9 +94,11 @@ app.delete('/api/persons/:id', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    Person
+  console.log('Finding persons')
+  Person
       .find({})
       .then(persons => {
+          console.log('Persons found in DB')
           mongoose.connection.close()
           res.json(persons)
         })
