@@ -99,7 +99,7 @@ app.get('/api/persons', (req, res) => {
       .find({})
       .then(persons => {
           console.log('Persons found in DB')
-          clog(persons)
+          console.log(persons)
           mongoose.connection.close()
           res.json(persons)
         })
