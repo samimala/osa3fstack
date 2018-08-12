@@ -101,7 +101,7 @@ app.get('/api/persons', (req, res) => {
         result.foreach(person => {
           dbcatalogue.push(person)
         })
-
+        mongoose.connection.close()
       })
     res.json(dbcatalogue)
  })
