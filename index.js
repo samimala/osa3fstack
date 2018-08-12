@@ -13,6 +13,7 @@ const morgan = require('morgan')
 morgan.token('reqbody', (req,res) => JSON.stringify(req.body) )
 app.use(morgan(':method :url :reqbody :status :res[content-length] - :response-time ms'))
 
+const Person = require('./models/person')
 
 let catalogue = [
     { name: 'Eka Nimi',
@@ -93,7 +94,15 @@ app.delete('/api/persons/:id', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    res.json(catalogue)
+    Person
+      .find({})
+      .then(result => {
+        result.foreach(person => {
+          dbcatalogue.push(person)
+        })
+
+      })
+    res.json(dbcatalogue)
  })
  
 
