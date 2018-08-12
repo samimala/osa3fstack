@@ -94,6 +94,7 @@ app.delete('/api/persons/:id', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
+    let dbcataloguq = []
     Person
       .find({})
       .then(result => {
