@@ -84,13 +84,16 @@ app.post('/api/persons/', (req, res) => {
     return res.status(400).json({error: 'Name already exists in the catalogue'})
   }
 
-  do {
-    var id = (Math.random()*100000).toFixed()
-  } while(catalogue.find(person => person.id === id))
+  let dbperson = new Person({
+    name: newperson.name,
+    number: newperson.number
+  })
 
-  newperson.id = id
-  catalogue.push(newperson)
-  res.json(newperson)
+  dbperson
+  .save()
+  .then(result => {
+    console.log('save ', result)
+  })
 })
 
 app.get('/api/persons', (req, res) => {
