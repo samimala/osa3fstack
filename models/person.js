@@ -11,6 +11,7 @@ const personSchema = new mongoose.Schema({
 })
 
 personSchema.statics.format = function(person) {
+    console.log('statics format: ', person)
     return { name: person.name, number: person.number, id: person._id } 
 };
 
