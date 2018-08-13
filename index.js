@@ -65,7 +65,7 @@ app.delete('/api/persons/:id', (req, res) => {
     res.status(204).end()
  })
 
- app.post('/api/persons/', (req, res) => {
+app.post('/api/persons/', (req, res) => {
   // Kloonataan json-olio, koska morgan tulostaa
   // req.bodyn vasta tämän routen loputtua, ja
   // routessa lisätään olioon id-kenttä
@@ -99,7 +99,7 @@ app.get('/api/persons', (req, res) => {
       .find({})
       .then(persons => {
           console.log('Persons found in DB')
-          console.log(persons)
+          console.log(persons.map(Persons.format))
           res.json(persons.map(Person.format))
       })
  })
