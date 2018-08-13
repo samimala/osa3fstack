@@ -99,7 +99,7 @@ app.get('/api/persons', (req, res) => {
       .find({})
       .then(persons => {
           console.log('Persons found in DB')
-          console.log(persons.map(Persons.format))
+          console.log(persons.map(Person.format))
           res.json(persons.map(Person.format))
       })
  })
