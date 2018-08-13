@@ -93,7 +93,7 @@ app.post('/api/persons/', (req, res) => {
   .save()
   .then(result => {
     console.log('save ', result)
-    res.json(Person.format)
+    res.json(result(Person.format))
   })
 })
 
