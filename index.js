@@ -101,7 +101,6 @@ app.get('/api/persons', (req, res) => {
           console.log('Persons found in DB')
           console.log(persons)
           res.json(persons.map(Person.format))
-          mongoose.connection.close()
       })
  })
  
