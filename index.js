@@ -91,9 +91,9 @@ app.post('/api/persons/', (req, res) => {
 
   dbperson
   .save()
-  .then(() => {
-    console.log('saved ', Person.format)
-    res.json(Person.format)
+  .then(person => {
+    console.log('saved ', Person.format(person))
+    res.json(Person.format(person))
   })
 })
 
