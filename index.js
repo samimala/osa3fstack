@@ -67,7 +67,7 @@ app.delete('/api/persons/:id', (req, res) => {
  })
 
 
-app.put('/api/persons/', (req, res) => { ---> tässä on vikaa
+app.put('/api/persons/', (req, res) => {
   const updateperson = Object.assign({},req.body)
   Person
     .findByIdAndUpdate(updateperson.id, updateperson)
