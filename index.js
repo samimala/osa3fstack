@@ -60,7 +60,7 @@ app.get('/api/persons/:id', (req, res) => {
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-    //findByIdAndRemove(req.params.id, (document)=>{console.log(document)})
+    Person.findByIdAndRemove(req.params.id, (document)=>{console.log(document)})
     res.status(204).end()
  })
 
