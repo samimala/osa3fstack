@@ -60,8 +60,11 @@ app.get('/api/persons/:id', (req, res) => {
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-    Person.findByIdAndRemove(req.params.id, (document)=>{console.log(document)})
-    res.status(204).end()
+    Person
+      .findByIdAndRemove(req.params.id)
+      .then(result=>res.status(204).end())
+      .catch(error=>res.status(400).send({error: 'Error in id'}))
+    
  })
 
 app.post('/api/persons/', (req, res) => {
