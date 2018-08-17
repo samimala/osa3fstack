@@ -60,8 +60,7 @@ app.get('/api/persons/:id', (req, res) => {
 })
 
 app.delete('/api/persons/:id', (req, res) => {
-    const id = Number(req.params.id)
-    catalogue = catalogue.filter(person => person.id !== id)
+    findByIdAndRemove(req.params.id, (document)=>{console.log(document)})
     res.status(204).end()
  })
 
@@ -95,6 +94,9 @@ app.post('/api/persons/', (req, res) => {
     console.log('saved ', Person.format(person))
     res.json(Person.format(person))
   })
+  .catch(error => {
+    console.log('Add person: ', error)
+  })
 })
 
 app.get('/api/persons', (req, res) => {
@@ -106,6 +108,9 @@ app.get('/api/persons', (req, res) => {
           console.log(persons.map(Person.format))
           res.json(persons.map(Person.format))
       })
+      .catch(error => {
+        console.log('Get persons: ', error)
+      }) 
  })
  
 
