@@ -73,7 +73,7 @@ app.put('/api/persons/', (req, res) => {
     .findByIdAndUpdate(updateperson.id, updateperson)
     .then(result=>res.status(200).end())
     .catch(error=>res.status(400).send({error: 'Error in id'}))
-}
+})
 
 app.post('/api/persons/', (req, res) => {
   // Kloonataan json-olio, koska morgan tulostaa
