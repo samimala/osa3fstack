@@ -71,9 +71,12 @@ app.put('/api/persons/', (req, res) => {
   const updateperson = req.body
   console.log('put: ', req.body)
   Person
-    .findByIdAndUpdate(updateperson.id, updateperson)
-    .then(result=>res.status(200).end())
-    .catch(error=>res.status(400).send({error: 'Error in id'}))
+    .findByIdAndUpdate(req.params.id, updateperson, {new: true})
+    .then(Person.format)
+    .catch(error => {
+      console.log(error)
+      res.status(400).send({error: 'Error in id'})
+    })
 })
 
 app.post('/api/persons/', (req, res) => {
