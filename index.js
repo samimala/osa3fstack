@@ -69,11 +69,12 @@ app.delete('/api/persons/:id', (req, res) => {
 
 app.put('/api/persons/:id', (req, res) => {
   const updateperson = req.body
+  console.log('Got request: ', req)
   Person
     .findByIdAndUpdate(req.params.id, updateperson, {new: true})
     .then(person => {
-      console.log('putted: ', person) 
-      res.json(Person.format)
+      console.log('putted: ', Person.format(person)) 
+      res.json(Person.format(person))
     })
     .catch(error => {
       console.log(error)
