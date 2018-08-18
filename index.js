@@ -68,7 +68,8 @@ app.delete('/api/persons/:id', (req, res) => {
 
 
 app.put('/api/persons/', (req, res) => {
-  const updateperson = Object.assign({},req.body)
+  const updateperson = req.body
+  console.log('put: ', req.body)
   Person
     .findByIdAndUpdate(updateperson.id, updateperson)
     .then(result=>res.status(200).end())
