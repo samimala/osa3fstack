@@ -72,7 +72,7 @@ app.put('/api/persons/:id', (req, res) => {
   Person
     .findByIdAndUpdate(req.params.id, updateperson, {new: true})
     .then(person => {
-      console.log('put: ', req.body) 
+      console.log('putted: ', person) 
       res.json(Person.format)
     })
     .catch(error => {
