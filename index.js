@@ -67,7 +67,7 @@ app.delete('/api/persons/:id', (req, res) => {
  })
 
 
-app.put('/api/persons/', (req, res) => {
+app.put('/api/persons/:id', (req, res) => {
   const updateperson = req.body
   console.log('put: ', req.body)
   Person
