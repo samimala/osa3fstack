@@ -98,7 +98,7 @@ app.post('/api/persons/', (req, res) => {
   .findOne({name: newperson.name})
   .then(person => {
     console.log('person already exists ', Person.format(person))
-    res.json(Person.format(person))
+    res.status(404).json({error: 'name exists'})
   })
   .catch(error => {
     console.log('Adding person')
