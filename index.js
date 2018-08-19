@@ -28,15 +28,14 @@ app.get('/info', (req, res) => {
 })
  
 app.get('/api/persons/:id', (req, res) => {
-   const id = req.params.id
+  const id = req.params.id
    
   Person
     .findById(id)
     .then(person => {
       res.json(person)
     })
-    .catch(
-       res.status(404).end()
+    .catch(error =>res.status(404).send({error: error})
     )
 })
 
