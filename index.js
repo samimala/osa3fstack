@@ -30,13 +30,14 @@ app.get('/info', (req, res) => {
 app.get('/api/persons/:id', (req, res) => {
    const id = Number(req.params.id)
    
-   const person = catalogue.find(person => person.id === id)
-   //console.log('Found person ', person)
-   if (person) {
-       res.json(person)
-   } else {
+  Person
+    .findById(id)
+    .then(person => {
+      res.json(person)
+    })
+    .catch(
        res.status(404).end()
-   }
+    )
 })
 
 app.delete('/api/persons/:id', (req, res) => {
