@@ -76,24 +76,33 @@ app.post('/api/persons/', (req, res) => {
     return res.status(400).json({error: 'Number missing'})  
   }
 
-  // Tarkista, onko nimi jo luettelossa
-  if (catalogue.find(person => person.name === newperson.name)) {
-    return res.status(400).json({error: 'Name already exists in the catalogue'})
+  const addNewPerson = (person) => {
+    let dbperson = new Person({
+      name: person.name,
+      number: person.number
+    })
+    
+    dbperson
+      .save()
+      .then(person => {
+        console.log('saved ', Person.format(person))
+        res.json(Person.format(person))
+      })
+      .catch(error => {
+        console.log('Add person failed: ', error)
+        res.status(404).end()
+      })
   }
 
-  let dbperson = new Person({
-    name: newperson.name,
-    number: newperson.number
-  })
-
-  dbperson
-  .save()
+  Person
+  .findOne({name: newperson.name})
   .then(person => {
-    console.log('saved ', Person.format(person))
+    console.log('person already exists ', Person.format(person))
     res.json(Person.format(person))
   })
   .catch(error => {
-    console.log('Add person: ', error)
+    console.log('Adding person')
+    addNewPerson(newperson)
   })
 })
 
