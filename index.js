@@ -33,7 +33,7 @@ app.get('/api/persons/:id', (req, res) => {
   Person
     .findById(id)
     .then(person => {
-      res.json(person)
+      res.json(Person.format(person))
     })
     .catch(error =>res.status(404).send({error: error})
     )
