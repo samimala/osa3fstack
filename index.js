@@ -25,6 +25,7 @@ app.get('/info', (req, res) => {
     .catch(error => {
       res.send('<div>Counting produce error: ' + error + '</div>')
     })
+})
  
 app.get('/api/persons/:id', (req, res) => {
    const id = Number(req.params.id)
